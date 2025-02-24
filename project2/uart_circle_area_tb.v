@@ -1,4 +1,3 @@
-
 // Testbench for uart_circle_area
 `timescale 1ns/1ns 
 module uart_circle_area_tb;
@@ -10,9 +9,10 @@ reg        rx_i;
 wire [7:0] rx_data;
 wire       rx_data_valid;
 wire       rx_error;
+wire [31:0] area_out;
   
 // Instantiate design under test
-uart_circle_area DUT(.clock(clock),.reset(reset),.rx_i(rx_i),.rx_data(rx_data),
+uart_circle_area DUT(.clock(clock),.reset(reset),.rx_i(rx_i),.rx_data(rx_data),.area_o(area_out),
 	    .rx_data_valid(rx_data_valid),.rx_error(rx_error));
           
 // Generate the clock
@@ -95,8 +95,8 @@ end
 task display;
   begin 
     #10;
-    $display("reset:%0h, rx_i:%0h, rx_data:%0h, rx_data_valid:%0h, rx_error:%0h",
-	      reset, rx_i, rx_data, rx_data_valid, rx_error);
+    $display("reset:%0h, rx_i:%0h, rx_data:%0h, rx_data_valid:%0h, area_out:%0h, rx_error:%0h",
+	      reset, rx_i, rx_data, rx_data_valid, area_out, rx_error);
   end
 endtask
 
