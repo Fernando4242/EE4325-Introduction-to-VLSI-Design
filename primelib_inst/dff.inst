@@ -1,0 +1,44 @@
+
+
+
+
+
+set_netlist_file [get_location]/netlists/dff.pex.sp
+
+## 
+## Pin definitions.
+## 
+add_pin VSS default -inout
+add_pin VDD default -inout
+add_pin CLK default -input
+add_pin R default -input
+add_pin D default -input
+add_pin Q default -output
+
+
+set_subckt_ports { VSS Q VDD CLK R D }
+
+## 
+## Cell function definition.
+## 
+
+
+
+
+## 
+## User-specified characterization and modeling configuration options.
+## 
+
+create_parameter cut_netlist
+set_config_opt -opcond __default__ -- cut_netlist dff.pex.sp
+
+## add_user_stimulus
+
+add_flop q Iq CLK D -clear R
+add_function Q q
+
+
+define_parameters dff {
+set area 30.077124
+}
+
